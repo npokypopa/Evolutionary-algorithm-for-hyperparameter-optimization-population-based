@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --group dev
+
+      - name: Ruff check
+        run: uv run ruff check pbt_xgb tests examples
+
+      - name: Ruff format check
+        run: uv run ruff format --check pbt_xgb tests examples
+
+      - name: Run tests
+        run: uv run pytest -q

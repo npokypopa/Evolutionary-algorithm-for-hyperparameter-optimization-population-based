@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# uv / virtual env
+.venv/
+
+# editor / tooling local state
+.claude/
+
+# legacy prototype (separate embedded git repo)
+population-based-training/
+
+# coverage
+.coverage
+htmlcov/
+
+# generated artifacts (recreate with examples/generate_data.py)
+data/
+models/
+results/
+results_*/
+.ipynb_checkpoints/
